@@ -48,4 +48,12 @@ public class Graph {
         }
         return true;
     }
+
+    public Vertex getVertex(String name) throws Exception {
+        for (Vertex v : vertices) {
+            if (v.getName().equals(name))
+                return v;
+        }
+        throw new Exception("Graph.getVertex: The vertex with the given name does not exist");
+    }
 }

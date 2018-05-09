@@ -50,6 +50,7 @@ public class Vertex {
         this.connectedTo.add(ver);
     }
 
+
     public void addConnection(Vertex ver, int type) throws Exception {
         if (type == DIRECTED) {
             this.setConnectedTo(ver);
@@ -61,6 +62,20 @@ public class Vertex {
         }
     }
 
+    public void removeConnection(Vertex ver, int type) throws Exception {
+        if (!this.connectedTo.contains(ver)) {
+            throw new Exception("Vertex.removeConnection: The given vertex is not connected with this vertex");
+        } else {
+            if (type == DIRECTED) {
+                this.connectedTo.remove(ver);
+            } else if (type == UNDIRECTED) {
+                ver.connectedTo.remove(ver);
+                this.connectedTo.remove(ver);
+            } else {
+                throw new Exception("Vertex.removeConnection: You can only remove directed or undirected connections");
+            }
+        }
+    }
 
     public int getState() {
         return state;
