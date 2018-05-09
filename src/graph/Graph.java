@@ -56,4 +56,12 @@ public class Graph {
         }
         throw new Exception("Graph.getVertex: The vertex with the given name does not exist");
     }
+
+    public void cleanUp() throws Exception {
+        for (Vertex v : vertices) {
+            v.setState(0);
+            v.setDistance(-999);
+            v.setParent(null);
+        }
+    }
 }
