@@ -6,11 +6,25 @@ public class Vertex {
     public static final int DIRECTED = 0;
     public static final int UNDIRECTED = 1;
 
+    public static final int WHITE = 0;
+    public static final int GREY = 1;
+    public static final int BLACK = 0;
+
     private int distance = -999;
     private Vertex parent = null;
     private ArrayList<Vertex> connectedTo = null;
     private int state = 0;
     private String name = null;
+
+    public boolean isStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
+
+    private boolean start = false;
 
 
     public Vertex(String name) {

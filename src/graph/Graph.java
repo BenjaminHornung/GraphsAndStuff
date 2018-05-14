@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Graph {
 
+    private boolean bfs = false;
     private int capacity = 10;
     private int size = 0;
     private Vertex[] vertices = new Vertex[1];
@@ -63,5 +64,13 @@ public class Graph {
             v.setDistance(-999);
             v.setParent(null);
         }
+    }
+
+    public boolean isBfs() {
+        return bfs;
+    }
+
+    public void setBfs(boolean bfs) {
+        this.bfs = bfs;
     }
 }
