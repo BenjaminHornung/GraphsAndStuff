@@ -8,11 +8,11 @@ public class Vertex {
 
     public static final int WHITE = 0;
     public static final int GREY = 1;
-    public static final int BLACK = 0;
+    public static final int BLACK = 2;
 
     private int distance = -999;
     private Vertex parent = null;
-    private ArrayList<Vertex> connectedTo = null;
+    private ArrayList<Vertex> connectedTo = new ArrayList<>();
     private int state = 0;
     private String name = null;
 
@@ -66,13 +66,16 @@ public class Vertex {
 
 
     public void addConnection(Vertex ver, int type) throws Exception {
-        if (type == DIRECTED) {
-            this.setConnectedTo(ver);
-        } else if (type == UNDIRECTED) {
-            ver.setConnectedTo(this);
-            this.setConnectedTo(ver);
-        } else {
-            throw new Exception("Vertex.addConnection: A connection can be either directed or undirected");
+        switch (type) {
+            case DIRECTED:
+                this.setConnectedTo(ver);
+                break;
+            case UNDIRECTED:
+                ver.setConnectedTo(this);
+                this.setConnectedTo(ver);
+                break;
+            default:
+                throw new Exception("Vertex.addConnection: A connection can be either directed or undirected");
         }
     }
 
@@ -80,13 +83,16 @@ public class Vertex {
         if (!this.connectedTo.contains(ver)) {
             throw new Exception("Vertex.removeConnection: The given vertex is not connected with this vertex");
         } else {
-            if (type == DIRECTED) {
-                this.connectedTo.remove(ver);
-            } else if (type == UNDIRECTED) {
-                ver.connectedTo.remove(ver);
-                this.connectedTo.remove(ver);
-            } else {
-                throw new Exception("Vertex.removeConnection: You can only remove directed or undirected connections");
+            switch (type) {
+                case DIRECTED:
+                    this.connectedTo.remove(ver);
+                    break;
+                case UNDIRECTED:
+                    ver.connectedTo.remove(ver);
+                    this.connectedTo.remove(ver);
+                    break;
+                default:
+                    throw new Exception("Vertex.removeConnection: You can only remove directed or undirected connections");
             }
         }
     }

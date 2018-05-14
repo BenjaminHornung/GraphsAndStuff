@@ -8,7 +8,7 @@ public class Graph {
     private boolean bfs = false;
     private int capacity = 10;
     private int size = 0;
-    private Vertex[] vertices = new Vertex[1];
+    private Vertex[] vertices = new Vertex[10];
 
     public Graph() {
     }
@@ -29,7 +29,7 @@ public class Graph {
         }
     }
 
-    private void addVertex(Vertex vert) throws Exception {
+    void addVertex(Vertex vert) throws Exception {
         if (checkNames(vert.getName())) {
             if (this.size == capacity) {
                 vertices = Arrays.copyOf(vertices, (capacity / 2) * 3);
@@ -38,13 +38,16 @@ public class Graph {
             vertices[size] = vert;
             size++;
         } else {
-            throw new Exception("Graph.addVertex: The name of a Vertex must be unique");
+            throw new Exception("Graph.addVertex: The name of a Vertex must be unique " +  vert.getName());
         }
     }
 
     public boolean checkNames(String name) {
         for (Vertex v : vertices) {
-            if (v.getName().equals(name))
+            if(v == null){
+                return true;
+            }
+            if ( v.getName().equals(name))
                 return false;
         }
         return true;
@@ -60,9 +63,11 @@ public class Graph {
 
     public void cleanUp() throws Exception {
         for (Vertex v : vertices) {
-            v.setState(0);
-            v.setDistance(-999);
-            v.setParent(null);
+            if(v != null){
+                v.setState(0);
+                v.setDistance(-999);
+                v.setParent(null);
+            }
         }
     }
 
